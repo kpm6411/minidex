@@ -1,3 +1,22 @@
+$bug-color:      rgb(112, 135, 46);
+$electric-color: rgb(233, 198, 14);
+$fire-color:     rgb(215, 62, 14);
+$grass-color:    rgb(88, 172, 13);
+$normal-color:   rgb(195, 195, 195);
+$rock-color:     rgb(130, 104, 59);
+$dark-color:     rgb(57, 48, 54);
+$fairy-color:    rgb(254, 171, 213);
+$flying-color:   rgb(147, 150, 240);
+$ground-color:   rgb(203, 181, 86);
+$poison-color:   rgb(166, 27, 184);
+$steel-color:    rgb(131, 131, 131);
+$dragon-color:   rgb(141, 76, 224);
+$fighting-color: rgb(113, 53, 4);
+$ghost-color:    rgb(86, 63, 179);
+$ice-color:      rgb(89, 200, 241);
+$psychic-color:  rgb(231, 78, 152);
+$water-color:    rgb(9, 111, 230);
+
 body {
   margin: 0;
   padding: 0;
@@ -25,3 +44,32 @@ body {
 .dex {
   padding: 2em;
 }
+
+.sprite {
+  width: 25%;
+}
+
+.typing {
+  padding: 8px;
+  border-radius: 0.5em;
+  color: white;
+}
+
+.bug {      background-color: $bug-color;      border: solid 3px darken($bug-color, 10%); }
+.electric { background-color: $electric-color; border: solid 3px darken($electric-color, 20%); }
+.fire {     background-color: $fire-color;     border: solid 3px darken($fire-color, 20%); }
+.grass {    background-color: $grass-color;    border: solid 3px darken($grass-color, 20%); }
+.normal {   background-color: $normal-color;   border: solid 3px darken($normal-color, 25%); }
+.rock {     background-color: $rock-color;     border: solid 3px darken($rock-color, 20%); }
+.dark {     background-color: $dark-color;     border: solid 3px darken($dark-color, 10%); }
+.fairy {    background-color: $fairy-color;    border: solid 3px darken($fairy-color, 20%); }
+.flying {   background-color: $flying-color;   border: solid 3px darken($flying-color, 20%); }
+.ground {   background-color: $ground-color;   border: solid 3px darken($ground-color, 20%); }
+.poison {   background-color: $poison-color;   border: solid 3px darken($poison-color, 15%); }
+.steel {    background-color: $steel-color;    border: solid 3px darken($steel-color, 20%); }
+.dragon {   background-color: $dragon-color;   border: solid 3px darken($dragon-color, 25%); }
+.fighting { background-color: $fighting-color; border: solid 3px darken($fighting-color, 10%); }
+.ghost {    background-color: $ghost-color;    border: solid 3px darken($ghost-color, 20%); }
+.ice {      background-color: $ice-color;      border: solid 3px darken($ice-color, 20%); }
+.psychic {  background-color: $psychic-color;  border: solid 3px darken($psychic-color, 20%); }
+.water {    background-color: $water-color;    border: solid 3px darken($water-color, 20%); }

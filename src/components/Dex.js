@@ -59,6 +59,21 @@ class Dex extends Component {
 
   render() {
     let mon = this.state.selectedMon
+    let type1 = undefined;
+    let type2 = undefined;
+    let className1 = "typing";
+    let className2 = ""
+    let spriteClass = "sprite"
+
+    if(mon.types) {
+      type1 = mon.types[0].type.name;
+      className1 += " " + type1;
+      spriteClass += " " + type1;
+      if(mon.types[1]){
+        type2 = mon.types[1].type.name;
+        className2 += "typing " + type2;
+      }
+    }
 
     return (
       <div className="dex">
@@ -69,10 +84,12 @@ class Dex extends Component {
           </div>
         </div>
         <h1>{mon.name}</h1>
+        <img className={spriteClass} src={mon.sprites ? mon.sprites.front_default : ''} alt={mon.name}/>
         <h2>#{mon.id}</h2>
         <h2>
-          {mon.types ? mon.types[0].type.name : 'Loading...'}
-          {mon.types && mon.types[1] ? ' - ' +mon.types[1].type.name : ''}
+          <span className={className1}>{type1 ? type1 : 'Loading...'}</span>
+          <span>{mon.types && mon.types[1] ? '  ' : ''}</span>
+          <span className={className2}>{type2 ? type2 : ''}</span>
         </h2>
       </div>
     );
