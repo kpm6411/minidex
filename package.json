@@ -3,14 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "pokedex-promise-v2": "^3.1.1",
     "react": "^16.4.1",
+    "react-app-rewire-hot-loader": "^1.0.1",
+    "react-app-rewired": "^1.5.2",
     "react-dom": "^16.4.1",
+    "react-hot-loader": "^4.3.2",
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "start": "react-app-rewired start",
+    "build": "yarn sass:build && react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-scripts eject",
+    "sass": "sass --watch src/styles/scss:src/styles/css",
+    "sass:build": "sass — update src/styles/scss:src/styles/css"
+  },
+  "devDependencies": {}
 }
