@@ -43,16 +43,47 @@ body {
 
 .dex {
   padding: 2em;
+  max-width: 500px;
+  margin: auto;
 }
 
 .sprite {
-  width: 25%;
+  width: 50%;
 }
 
 .typing {
   padding: 8px;
   border-radius: 0.5em;
   color: white;
+}
+
+.stat-list {
+  list-style-type: none;
+  margin-top: 1em;
+  li {
+    width: 325px;
+    height: 40px;
+    h4 {
+      float: left;
+      display: inline;
+      width: 69px;
+    }
+  }
+}
+
+.stat-bar {
+  display: block;
+  float: right;
+  width: 256px;
+  height: 30px;
+  background-color: #333333;
+}
+
+.stat-fill {
+  height: 100%;
+  float: left;
+  margin: 0px;
+  text-align: left;
 }
 
 .bug {      background-color: $bug-color;      border: solid 3px darken($bug-color, 10%); }

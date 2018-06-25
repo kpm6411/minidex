@@ -7,7 +7,7 @@ class App extends Component {
       <div className="App">
         <div className="top-bar">
           <h2>Minidex</h2>
-          <p>The streamlined Pokedex app</p>
+          <p>A streamlined Pokedex</p>
         </div>
         <Dex />
       </div>

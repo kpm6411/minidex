@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import Stats from './Stats';
 
 const pokeapiRoot = "https://pokeapi.co/api/v2/";
 
 class Dex extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       dex: [],
       selectedMon: {},
-      searchMon: ""
+      searchMon: "",
+      stats: [50,50,50,50,50,50]
     }
   }
 
@@ -49,9 +51,12 @@ class Dex extends Component {
       .then((data) => {
         newMon = data;
         dex.push(newMon);
+        let statArr = [];
+        newMon.stats.forEach((e) => statArr.unshift(e.base_stat));
         this.setState({
           selectedMon: newMon,
-          dex: dex
+          dex: dex,
+          stats: statArr
         });
       })
       .catch(err => console.log(err));
@@ -91,6 +96,7 @@ class Dex extends Component {
           <span>{mon.types && mon.types[1] ? '  ' : ''}</span>
           <span className={className2}>{type2 ? type2 : ''}</span>
         </h2>
+        <Stats stats={this.state.stats}/>
       </div>
     );
   }
