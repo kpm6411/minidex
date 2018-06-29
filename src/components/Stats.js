@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 
 class Stats extends Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     HP: 50,
-  //     Atk: 60,
-  //     Def: 70,
-  //     SAtk: 30,
-  //     SDef: 90,
-  //     Spd: 80
-  //   }
-  // }
-
   render() {
     let stats = this.props.stats;
 

@@ -7,7 +7,7 @@ class Dex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dex: [],
+      dex: {},
       selectedMon: {},
       searchMon: "",
       stats: [50,50,50,50,50,50]
@@ -16,14 +16,55 @@ class Dex extends Component {
 
   //Load page with random pokemon
   componentWillMount() {
+    var localDex = localStorage.getItem("pokedex");
+    if(localDex) {
+      localDex = JSON.parse(localDex);
+      this.setState({ dex: localDex });
+    }
+
     let rand = Math.floor(Math.random() * 806 + 1);
-    let pokeapi = pokeapiRoot + "pokemon/" + rand + "/";
-    this.getMon(pokeapi);
+
+    if(!this.checkDex(rand)) {
+      let pokeapi = pokeapiRoot + "pokemon/" + rand + "/";
+      this.getMon(pokeapi);
+    }
+  }
+
+  checkDex(query) {
+    let match = false;
+    let matchMon;
+    let searchId = parseInt(query, 10);
+
+    if(!isNaN(searchId)) {
+      for(var mon in this.state.dex) {
+        if(mon.id === searchId) {
+          match = true;
+          matchMon = mon;
+          break;
+        }
+      }
+    } else {
+      if(this.state.dex[query]) {
+        match = true;
+        matchMon = this.state.dex[query];
+      }
+    }
+
+    if(match) {
+      var statArr = [];
+      matchMon.stats.forEach((e) => statArr.unshift(e.base_stat));
+      this.setState({
+        selectedMon: matchMon,
+        stats: statArr
+      });
+    }
+
+    return match;
   }
 
   //Prepare search with text input
   handleInput(e) {
-    this.setState({ searchMon: e.target.value });
+    this.setState({ searchMon: e.target.value.toLowerCase() });
   }
 
   //Submits search when pressing Enter
@@ -36,8 +77,10 @@ class Dex extends Component {
   //Perform search for pokemon
   handleSearch() {
     if(this.state.searchMon.length > 0){
-      let pokeapi = pokeapiRoot + "pokemon/" + this.state.searchMon + "/";
-      this.getMon(pokeapi);
+      if(!this.checkDex(this.state.searchMon)){
+        let pokeapi = pokeapiRoot + "pokemon/" + this.state.searchMon + "/";
+        this.getMon(pokeapi);
+      }
     }
   }
 
@@ -50,7 +93,8 @@ class Dex extends Component {
       .then(res => res.json())
       .then((data) => {
         newMon = data;
-        dex.push(newMon);
+        dex[newMon.name] = newMon;
+        localStorage.setItem("pokedex", JSON.stringify(dex));
         let statArr = [];
         newMon.stats.forEach((e) => statArr.unshift(e.base_stat));
         this.setState({
