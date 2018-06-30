@@ -4,6 +4,8 @@ class Stats extends Component {
   render() {
     let stats = this.props.stats;
 
+    // Renders six proportionally filled stat bars and styles them.
+    // Bars fill 1 pixel for each stat point, up to max length of 256.
     if(this.props.loaded){
       return (
         <ul className="stat-list">

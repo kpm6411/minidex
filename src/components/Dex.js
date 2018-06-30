@@ -10,7 +10,8 @@ class Dex extends Component {
       dex: {},
       selectedMon: {},
       searchMon: "",
-      stats: [50,50,50,50,50,50]
+      stats: [50,50,50,50,50,50],
+      message: "Loading..."
     }
   }
 
@@ -70,7 +71,7 @@ class Dex extends Component {
 
   //Submits search when pressing Enter
   handleKeyUp(e) {
-    if(e.keyCode === 13) {
+    if(e.keyCode === 13 && ( this.state.message === "Not found." || this.state.selectedMon.types)) {
       this.handleSearch();
     }
   }
@@ -78,7 +79,10 @@ class Dex extends Component {
   //Perform search for pokemon
   handleSearch() {
     if(this.state.searchMon.length > 0){
-      this.setState({ selectedMon: {} });
+      this.setState({
+        selectedMon: {},
+        message: "Loading..."
+      });
       if(!this.checkDex(this.state.searchMon)){
         let pokeapi = pokeapiRoot + "pokemon/" + this.state.searchMon + "/";
         this.getMon(pokeapi);
@@ -116,7 +120,10 @@ class Dex extends Component {
           });
         });
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        this.setState({ message: "Not found." });
+      });
   }
 
   render() {
@@ -128,7 +135,7 @@ class Dex extends Component {
             <button className="btn btn-outline-secondary" type="button" onClick={this.handleSearch.bind(this)}>Search</button>
           </div>
         </div>
-        <SelectedMon mon={this.state.selectedMon} stats={this.state.stats} />
+        <SelectedMon mon={this.state.selectedMon} stats={this.state.stats} message={this.state.message}/>
       </div>
     );
   }

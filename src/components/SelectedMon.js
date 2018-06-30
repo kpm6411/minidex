@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Stats from './Stats';
 
 class SelectedMon extends Component {
+  // Formats important text to begin with a capital letter.
   capitalize(str) {
     if(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
     }
   }
 
+  // Prepares and renders monster data passed through props.
   render() {
     let mon = this.props.mon;
     let type1 = undefined;
@@ -19,6 +21,7 @@ class SelectedMon extends Component {
     let loaded = false;
     let monNumber = "";
 
+    // Ensures data has loaded by checking types.
     if(mon.types) {
       loaded = true;
       monNumber = "#" + mon.id;
@@ -40,6 +43,7 @@ class SelectedMon extends Component {
       }
     }
 
+    // Creates text boxes for pokedex entries.
     let flavorBox = flavor.map((entry) => {
       if(entry.version){
         let text = entry.text.replace('\n', ' ');
@@ -55,13 +59,15 @@ class SelectedMon extends Component {
       }
     });
 
+    // Renders monster name, sprite, number, type, stats, descriptions.
+    // If data not yet loaded, only shows "Loading..."
     return(
       <div>
         <h1>{this.capitalize(mon.name)}</h1>
         <img className={spriteClass} src={mon.sprites ? mon.sprites.front_default : ''} alt={mon.name}/>
         <h2>{monNumber}</h2>
         <h2>
-          <span className={className1}>{type1 ? this.capitalize(type1) : 'Loading...'}</span>
+          <span className={className1}>{type1 ? this.capitalize(type1) : this.props.message}</span>
           <span>{mon.types && mon.types[1] ? '  ' : ''}</span>
           <span className={className2}>{type2 ? this.capitalize(type2) : ''}</span>
         </h2>
