@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Stats from './Stats';
+import SelectedMon from './SelectedMon';
 
 const pokeapiRoot = "https://pokeapi.co/api/v2/";
 
@@ -30,6 +30,7 @@ class Dex extends Component {
     }
   }
 
+  // Searches dex to see if mon is cached. Returns bool, if false should run this.getMon()
   checkDex(query) {
     let match = false;
     let matchMon;
@@ -107,23 +108,6 @@ class Dex extends Component {
   }
 
   render() {
-    let mon = this.state.selectedMon
-    let type1 = undefined;
-    let type2 = undefined;
-    let className1 = "typing";
-    let className2 = ""
-    let spriteClass = "sprite"
-
-    if(mon.types) {
-      type1 = mon.types[0].type.name;
-      className1 += " " + type1;
-      spriteClass += " " + type1;
-      if(mon.types[1]){
-        type2 = mon.types[1].type.name;
-        className2 += "typing " + type2;
-      }
-    }
-
     return (
       <div className="dex">
         <div className="input-group mb-3">
@@ -132,15 +116,7 @@ class Dex extends Component {
             <button className="btn btn-outline-secondary" type="button" onClick={this.handleSearch.bind(this)}>Search</button>
           </div>
         </div>
-        <h1>{mon.name}</h1>
-        <img className={spriteClass} src={mon.sprites ? mon.sprites.front_default : ''} alt={mon.name}/>
-        <h2>#{mon.id}</h2>
-        <h2>
-          <span className={className1}>{type1 ? type1 : 'Loading...'}</span>
-          <span>{mon.types && mon.types[1] ? '  ' : ''}</span>
-          <span className={className2}>{type2 ? type2 : ''}</span>
-        </h2>
-        <Stats stats={this.state.stats}/>
+        <SelectedMon mon={this.state.selectedMon} stats={this.state.stats} />
       </div>
     );
   }
