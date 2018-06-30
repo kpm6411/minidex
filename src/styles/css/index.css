@@ -55,6 +55,12 @@ body {
   margin: 0px;
   text-align: left; }
 
+.flavor-entry {
+  border: solid 2px black;
+  list-style-type: none;
+  background-color: #333333;
+  margin-bottom: 0.5em; }
+
 .bug {
   background-color: #70872e;
   border: solid 3px #506121; }

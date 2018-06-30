@@ -78,6 +78,7 @@ class Dex extends Component {
   //Perform search for pokemon
   handleSearch() {
     if(this.state.searchMon.length > 0){
+      this.setState({ selectedMon: {} });
       if(!this.checkDex(this.state.searchMon)){
         let pokeapi = pokeapiRoot + "pokemon/" + this.state.searchMon + "/";
         this.getMon(pokeapi);
@@ -89,19 +90,30 @@ class Dex extends Component {
   getMon(pokeapi) {
     let newMon = {};
     let dex = this.state.dex;
+    let statArr = [];
+    let speciesAPI = "";
+    let species = {};
 
     fetch(pokeapi)
       .then(res => res.json())
       .then((data) => {
         newMon = data;
         dex[newMon.name] = newMon;
-        localStorage.setItem("pokedex", JSON.stringify(dex));
-        let statArr = [];
+        speciesAPI = newMon.species.url;
         newMon.stats.forEach((e) => statArr.unshift(e.base_stat));
-        this.setState({
-          selectedMon: newMon,
-          dex: dex,
-          stats: statArr
+      })
+      .then(() => {
+        fetch(speciesAPI)
+        .then(res => res.json())
+        .then((data) => {
+          species = data;
+          dex[newMon.name].species = species;
+          localStorage.setItem("pokedex", JSON.stringify(dex));
+          this.setState({
+            selectedMon: newMon,
+            dex: dex,
+            stats: statArr
+          });
         });
       })
       .catch(err => console.log(err));
