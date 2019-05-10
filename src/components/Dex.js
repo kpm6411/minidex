@@ -17,11 +17,11 @@ class Dex extends Component {
 
   //Load page with random pokemon
   componentWillMount() {
-    var localDex = localStorage.getItem("pokedex");
-    if(localDex) {
-      localDex = JSON.parse(localDex);
-      this.setState({ dex: localDex });
-    }
+    // var localDex = localStorage.getItem("pokedex");
+    // if(localDex) {
+    //   localDex = JSON.parse(localDex);
+    //   this.setState({ dex: localDex });
+    // }
 
     let rand = Math.floor(Math.random() * 806 + 1);
 
