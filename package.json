@@ -2,6 +2,9 @@
   "name": "minidex",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "8.11.3"
+  },
   "dependencies": {
     "pokedex-promise-v2": "^3.1.1",
     "react": "^16.4.1",
